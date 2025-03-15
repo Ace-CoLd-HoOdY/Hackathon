@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Air quality</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #3f51b5;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        main {
+            padding: 20px;
+        }
+        .chart-container {
+            margin: 30px 0;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container container">
+            <a class="header-link" href="/index.html"><img class="header-logo" src="/Img/image.png" alt="Logo"></a>
+            <ul class="header-list">
+                <li class="header-item">
+                    <h1 class="title"><span class="span">Eco</span> Моніторинг</h1>
+                </li>
+                <li class="header-item">
+                    <p class="header-text">Будь в курсі, дбай про планету!</p>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <style>
+            body{
+        font-family: Arial, sans-serif;
+        background-color: #e1f5fe;
+        color: #333;
+        padding: 20px;
+    }
+    header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    input, button {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+    }
+    button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    canvas {
+        max-width: 100%;
+        height: 400px;
+    }
+</style>
+</head>
+<body>
+<header>
+    <h1>Дані про якість повітря</h1>
+    <input type="text" id="cityInput" placeholder="Введіть місто...">
+    <button id="getAirQuality">Отримати якість повітря</button>
+</header>
+<canvas id="airQualityChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.getElementById('getAirQuality').addEventListener('click', function() {
+        const city = document.getElementById('cityInput').value;
+        if (city) {
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=24fdc98e3a69639cc8b8cc68bcbd0c39`)
+                .then(response => response.json())
+                .then(data => {
+                    const lat = data.coord.lat;
+                    const lon = data.coord.lon;
+                    fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=YOUR_API_KEY`)
+                        .then(response => response.json())
+                        .then(airData => {
+                            const pm25 = airData.list[0].components.pm2_5;
+                            updateAirQualityChart(pm25);
+                        });
+                });
+        } else {
+            alert('Будь ласка, введіть місто!');
+        }
+    });
+
+    function updateAirQualityChart(pm25) {
+        const ctx = document.getElementById('airQualityChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Січ', 'Лют', 'Бер', 'Квіт', 'Трав', 'Черв'],
+                datasets: [{
+                    label: 'Якість повітря (PM2.5)',
+                    data: [pm25, pm25 + 5, pm25 - 2, pm25 + 4, pm25 + 3, pm25 + 2],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+</script>
+    </main>
+    <footer class="footer">
+        <div class="footer-wrap container">
+            <a class="footer-logo" href="index.html"><img class="footer-logo" src="/Img/image.png" alt="Logo"></a>
+            <ul class="footer-list">
+                <li class="footer-item">
+                    <a class="footer-link" target="_blank" href="https://github.com/Ace-CoLd-HoOdY"><img
+                            class="footer-icon" src="/Img/211904_social_github_icon.png" alt="Github"></a>
+                </li>
+                <li class="footer-item">
+                    <a class="footer-link" target="_blank" href="tel:+380730000000"><img class="footer-icon"
+                            src="/Img/2849835_phone_telephone_cell_call_communication_icon.png" alt="Phone"></a>
+                </li>
+                <li class="footer-item">
+                    <a class="footer-link" target="_blank" href="mailto:newspaper@gmail.com"><img class="footer-icon"
+                            src="/Img/8666723_mail_icon.png" alt="mail"></a>
+                </li>
+                <li class="footr-item"><a class="footer-link" target="_blank"
+                        href="https://www.google.com/maps/place/Національний+авіаційний+університет/@50.4400743,30.4273012,17z/data=!3m1!4b1!4m6!3m5!1s0x40d4cc19f547785d:0xe7e588240239d964!8m2!3d50.4400743!4d30.4298761!16s%2Fm%2F04g05k3?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D">
+                        <img class="footer-icon" src="/Img/352521_location_on_icon.png" alt="Location"></a>
+                </li>
+                <li class="footer-item">
+                    <img class="footer-icon" src="/Img/4747497_social media_facebook_icon.png" alt="Facebook">
+                </li>
+                <li class="footer-item">
+                    <img class="footer-icon" src="/Img/5279112_camera_instagram_social media_instagram logo_icon.png" alt="Instagram">
+                </li>
+                <li class="footer-item">
+                    <img class="footer-icon" src="/Img/11053969_x_logo_twitter_new_brand_icon.png" alt="X">
+                </li>
+                <li class="footer-item">
+                    <img class="footer-icon" src="/Img/7693324_telegram_social media_logo_messenger_icon.png" alt="Telegram">
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

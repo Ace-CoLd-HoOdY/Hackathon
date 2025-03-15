@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Моніторинг</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
+    <script>// Заміни URL API на той, який використовуєш ти.
+const apiKey = '24fdc98e3a69639cc8b8cc68bcbd0c39';
+const apiUrl = 'https://api.openweathermap.org/data/2.5/forecast';
+
+// Слухаємо натискання на кнопку
+document.getElementById('getDataBtn').addEventListener('click', function (event) {
+    event.preventDefault();
+
+    const city = document.getElementById('cityInput').value.trim();
+    const theme = document.getElementById('themeSelect').value;
+
+    if (!city) {
+        alert('Будь ласка, введіть місто!');
+        return;
+    }
+
+    // Формуємо URL для запиту до OpenWeatherMap API
+    const url = `${apiUrl}?q=${city}&units=metric&appid=${apiKey}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.cod === '200') {
+                // Дані отримано успішно, будуємо графік
+                buildChart(data, theme);
+            } else {
+                alert('Не вдалося знайти місто, перевірте правильність введення!');
+            }
+        })
+        .catch(error => {
+            console.error('Помилка при запиті:', error);
+            alert('Сталася помилка при запиті даних.');
+        });
+});
+
+// Функція для створення графіка
+function buildChart(data, theme) {
+    const labels = data.list.map(item => {
+        const date = new Date(item.dt * 1000);
+        return `${date.getHours()}:${date.getMinutes()}`;
+    });
+
+    let chartData = [];
+    if (theme === 'temperature') {
+        chartData = data.list.map(item => item.main.temp);
+    } else if (theme === 'humidity') {
+        chartData = data.list.map(item => item.main.humidity);
+    } else if (theme === 'wind') {
+        chartData = data.list.map(item => item.wind.speed);
+    }
+
+    // Створення графіка
+    const ctx = document.getElementById('weatherChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: `${theme.charAt(0).toUpperCase() + theme.slice(1)}`,
+                data: chartData,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+}
+
+        </script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-container container">
+            <a class="header-link" href="/index.html"><img class="header-logo" src="/Img/image.png" alt="Logo"></a>
+            <ul class="header-list">
+                <li class="header-item">
+                    <h1 class="title"><span class="span">Eco</span> Моніторинг</h1>
+                </li>
+                <li class="header-item">
+                    <p class="header-text">Будь в курсі, дбай про планету!</p>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main class="main">
+        <section class="description">
+            <p class="description-text">Проект "<span class="span">Eco</span> Моніторинг" спрямований на створення
+                інтерактивної веб-платформи, що
+                надає користувачам доступ до актуальної інформації про стан екології в їхньому регіоні. За допомогою
+                цього сайту користувачі зможуть моніторити якість повітря, викиди CO₂, ефективність переробки сміття,
+                споживання енергії та стан місцевих екосистем. </p>
+        </section>
+        <section class="geo">
+            <div class="geo-container container">
+                <p class="geo-text">Введіть навзу свого міста щоб слідкувати за його <span
+                        class="span">еко</span>системою</p>
+                <input id="cityInput" class="input" checkedgeo-input type="text" placeholder="Місто">
+                <button id="getDataBtn" class="geo-button" href="">Підтвердити</button>
+            </div>
+        </section>
+        <section class="eco">
+            <div class="eco-container container">
+                <ul class="eco-list">
+                    <li class="eco-item"><a class="eco-link" id="airQualityBtn" href="airs-quality.html">Якість повітря</a></li>
+                    <li class="eco-item"><a class="eco-link" id="co2EmissionsBtn" href="">Викиди CO₂</a></li>
+                    <li class="eco-item"><a class="eco-link" id="wasteRecyclingBtn" href="">Переробка сміття</a></li>
+                    <li class="eco-item"><a class="eco-link" id="energyConsumptionBtn" href="">Енергоспоживання</a></li>
+                    <li class="eco-item"><a class="eco-link" id="ecosystemBtn" href=""><span class="span">Еко</span>системи</a></li>
+                </ul>
+            </div>
+        </section>
+        <section class="eco-projects">
+            <h2 class="eco-projects-title">Найновіші екопроекти</h2>
+            <div class="news">
+                <ul class="news-list">
+                    <li class="news-item margin">
+                        <a class="news-wrap" href="new-one.html">
+                            <img class="news-img1" src="Img/18052021.jpg" alt="Земля">
+                            <div class="news-text-wrap">
+                                <h2 class="news-title">Зелене відновлення українських громад</h2>
+                                <p class="news-text">Програма підтримує громадські організації, які впроваджують проєкти
+                                    з відновлення та адаптації до змін клімату в різних містах та громадах України.</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="news-item margin">
+                        <a class="news-wrap" href="new-two.html">
+                            <img class="news-img2" src="/Img/green-shield-with-leaf-logo-design_301434-194.avif"
+                                alt="Зелений щит">
+                            <div class="news-text-wrap">
+                                <h2 class="news-title">Проєкт «Зелений щит»</h2>
+                                <p class="news-text">Студенти з Маріуполя висадили хвойні дерева та кущі для зменшення
+                                    шуму та пилу біля свого коледжу, покращуючи екологічну ситуацію в навчальному
+                                    закладі.</p>
+                            </div>
+                        </a>
+                    <li class="news-item margin">
+                        <a class="news-wrap" href="new-three.html">
+                            <img class="news-img" src="Img/zmina-klimatu.jpg" alt="Зміна клімату">
+                            <div class="news-text-wrap">
+                                <h2 class="news-title">Локальні проєкти з адаптації до зміни клімату</h2>
+                                <p class="news-text">Громадські організації реалізують проєкти в Сумах, Запоріжжі,
+                                    Люботині та інших громадах, спрямовані на зелене відновлення та адаптацію до
+                                    кліматичних змін.</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="news-item">
+                        <a class="news-wrap" href="new-four.html">
+                            <img class="news-img" src="Img/download.png" alt="MoRe4nature">
+                            <div class="news-text-wrap">
+                                <h2 class="news-title">Проєкт more4nature</h2>
+                                <p class="news-text">Національний екологічний центр України працює над розширенням
+                                    можливостей громадян у забезпеченні дотримання екологічних норм через моніторинг та
+                                    звітування.</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="news-item">
+                        <a class="news-wrap" href="new-five.html">
+                            <img class="news-img" src="Img/image1.png" alt="Папір з листя">
+                            <div class="news-text-wrap">
+                                <h2 class="news-title">Як Releaf Paper робить папір з листя.</h2>
+                                <p class="news-text">Від шкільного проєкту до стартапу на мільйони.</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="news-item">
+                        <a class="news-wrap" href="new-six.html">
+                            <img class="news-img2" src="Img/download (1).png" alt="МХП">
+                            <div class="news-text-wrap">
+                                <h2 class="news-title">БіоТЕЦ компанії МХП</h2>
+                                <p class="news-text">Компанія «Миронівський хлібопродукт» запустила біоТЕЦ, яка генерує
+                                    енергію з відходів виробництва, забезпечуючи енергією власні потреби та зменшуючи
+                                    викиди парникових газів.</p>
+                            </div>
+                        </a>
+                    </li>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-wrap container">
+            <a class="footer-logo" href="index.html"><img class="footer-logo" src="/Img/image.png" alt="Logo"></a>
+            <ul class="footer-list">
+                <li class="footer-item">
+                    <a class="footer-link" target="_blank" href="https://github.com/Ace-CoLd-HoOdY"><img
+                            class="footer-icon" src="/Img/211904_social_github_icon.png" alt="Github"></a>
+                </li>
+                <li class="footer-item">
+                    <a class="footer-link" target="_blank" href="tel:+380730000000"><img class="footer-icon"
+                            src="/Img/2849835_phone_telephone_cell_call_communication_icon.png" alt="Phone"></a>
+                </li>
+                <li class="footer-item">
+                    <a class="footer-link" target="_blank" href="mailto:newspaper@gmail.com"><img class="footer-icon"
+                            src="/Img/8666723_mail_icon.png" alt="mail"></a>
+                </li>
+                <li class="footr-item"><a class="footer-link" target="_blank"
+                        href="https://www.google.com/maps/place/Національний+авіаційний+університет/@50.4400743,30.4273012,17z/data=!3m1!4b1!4m6!3m5!1s0x40d4cc19f547785d:0xe7e588240239d964!8m2!3d50.4400743!4d30.4298761!16s%2Fm%2F04g05k3?entry=ttu&g_ep=EgoyMDI1MDMxMi4wIKXMDSoASAFQAw%3D%3D">
+                        <img class="footer-icon" src="/Img/352521_location_on_icon.png" alt="Location"></a>
+                </li>
+                <li class="footer-item">
+                    <img class="footer-icon" src="/Img/4747497_social media_facebook_icon.png" alt="Facebook">
+                </li>
+                <li class="footer-item">
+                    <img class="footer-icon" src="/Img/5279112_camera_instagram_social media_instagram logo_icon.png" alt="Instagram">
+                </li>
+                <li class="footer-item">
+                    <img class="footer-icon" src="/Img/11053969_x_logo_twitter_new_brand_icon.png" alt="X">
+                </li>
+                <li class="footer-item">
+                    <img class="footer-icon" src="/Img/7693324_telegram_social media_logo_messenger_icon.png" alt="Telegram">
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>

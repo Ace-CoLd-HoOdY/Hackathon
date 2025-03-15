@@ -1,0 +1,249 @@
+*{
+    margin: 0;
+}
+
+main{
+    background-color: #238216;
+    padding-bottom: 45px;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+    font-family: "Neucha", cursive;
+    color: #213739;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+} 
+
+.span {
+    font-weight: 900;
+    color: #68ff00;
+}
+
+
+.header{
+    background-color: #24d40f;
+}
+
+.header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.header-list{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.header-logo{
+    width: 150px;
+}
+
+.title{
+    padding: 15px;
+    font-size: 40px;
+    letter-spacing: 2px;
+    color: #2e4a4c;
+}
+
+.header-text{
+    padding-bottom: 15px;
+    font-size: 20px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+
+.description-text{
+    font-weight: 600;
+    padding: 20px 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.geo-text{
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 10px;
+}
+
+.input {
+    padding: 10px;
+    width: 60%;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.geo-button {
+    background-color: #388E3C;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.geo-button:hover {
+    background-color: #4CAF50;
+}
+
+.eco-container{
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+}
+
+.eco-list{
+    padding: 15px 0;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.eco-item{
+    margin: auto 10px;
+}
+
+.eco-link {
+    text-decoration: none;
+    color: #2e4a4c;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px 25px;
+    border-radius: 30px;
+    background-color: #4caf50;
+    transition: all 0.3s ease;
+}
+
+.eco-link:hover {
+        background-color: #388e3c;
+        color: #fff;
+        transform: translateY(-3px);
+}
+
+.eco-projects-title{
+    padding: 30px 0;
+    font-size: 35px;
+    text-align: center;
+}
+
+/* News */
+.news {
+    background-color: rgb(247, 247, 247);
+    padding: 30px;
+    margin: 0 100px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    box-shadow: 0px 1px 1px RGB(0 0 0/12%), 0px 4px 4px RGB(0 0 0/6%), 1px 4px 6px RGB(0 0 0/16%);
+}
+
+.news-list {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.margin {
+    margin-bottom: 15px;
+}
+
+.news-item {
+    width: 330px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgb(224, 223, 223);
+}
+
+.news-item:hover {
+    box-shadow: 0px 1px 1px RGB(0 0 0/12%), 0px 4px 4px RGB(0 0 0/6%), 1px 4px 6px RGB(0 0 0/16%);
+}
+
+.news-img {
+    width: 100%;
+    height: 200px;
+    padding-bottom: 30px;
+}
+
+.news-img1 {
+    width: 100%;
+    height: 220px;
+    padding-bottom: 30px;
+}
+
+.news-img2 {
+    width: 70%;
+    height: 220px;
+    display: flex;
+    justify-self: center;
+}
+
+.news-title {
+    color: black;
+    padding-bottom: 20px;
+}
+
+.news-text {
+    color: black;
+}
+
+
+.footer {
+    background-color: #24d40f;
+    padding: 30px 0;
+    }
+
+.footer-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo {
+    color: #fec830;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.footer-list {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.footer-link {
+    color: white;
+    font-size: 20px;
+}
+
+.footer-logo{
+    width: 150px;
+}
+
+.footer-icon{
+    width: 50px;
+}

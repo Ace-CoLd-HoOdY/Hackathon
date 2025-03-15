@@ -1,0 +1,56 @@
+<!-- <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викиди CO₂</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Викиди CO₂</h1>
+            <p>Дані про викиди CO₂ в вашому регіоні. Тренди і прогнози по зниженню викидів.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <canvas id="co2Chart"></canvas>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Еко Моніторинг. Всі права захищені.</p>
+        </div>
+    </footer>
+
+    <script>
+        var co2Data = {
+            labels: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень'],
+            datasets: [{
+                label: 'Викиди CO₂ (т)',
+                data: [1200, 1100, 1300, 1250, 1400],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var co2Config = {
+            type: 'line',
+            data: co2Data,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        var co2Chart = new Chart(document.getElementById('co2Chart'), co2Config);
+    </script>
+</body>
+</html> -->

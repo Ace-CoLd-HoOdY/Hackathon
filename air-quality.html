@@ -1,0 +1,56 @@
+<!-- <!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Якість повітря</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Якість повітря</h1>
+            <p>Дані про якість повітря в різних містах. Включає рівень PM2.5, CO, NO₂, O₃ та прогноз на наступні дні.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <canvas id="airQualityChart"></canvas>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Еко Моніторинг. Всі права захищені.</p>
+        </div>
+    </footer>
+
+    <script>
+        var airQualityData = {
+            labels: ['PM2.5', 'CO', 'NO₂', 'O₃'],
+            datasets: [{
+                label: 'Якість повітря (мкг/м³)',
+                data: [35, 20, 10, 50],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        var airQualityConfig = {
+            type: 'bar',
+            data: airQualityData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        var airQualityChart = new Chart(document.getElementById('airQualityChart'), airQualityConfig);
+    </script>
+</body>
+</html> -->
